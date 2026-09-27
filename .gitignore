@@ -1,0 +1,11 @@
+target/
+.idea/
+*.iml
+.DS_Store
+.env.local
+.env.*
+*.log
+*.local.properties
+/INTERVIEW_STUDY_PLAN.md
+/README.md
+/configuration.properties
