@@ -3,6 +3,7 @@ package dev.eyup.searchai.qe.assertions;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.*;
 
 
@@ -25,8 +26,30 @@ public class WeatherApiAssertion {
         response.then()
                 .statusCode(401)
                 .contentType(ContentType.JSON)
-                .body("error.message", not(emptyOrNullString()))
                 .body("error.message", equalTo("API key is invalid or not provided."))
-                .body("error.code", equalTo(1002));
+                .body("error.code", equalTo(1002))
+                .body(matchesJsonSchemaInClasspath("schemas/rest/current_weather_error_schema.json"));
+        ;
+    }
+
+    public static void assertInvalidApiKeyResponse(Response response) {
+
+        response.then()
+                .statusCode(401)
+                .contentType(ContentType.JSON)
+                .body("error.message", equalTo("API key is invalid."))
+                .body("error.code", equalTo(2006))
+                .body(matchesJsonSchemaInClasspath("schemas/rest/current_weather_error_schema.json"));
+        ;
+    }
+
+    public static void assertMissingQueryResponse(Response response) {
+
+        response.then()
+                .statusCode(400)
+                .contentType(ContentType.JSON)
+                .body("error.message", equalTo("Parameter q is missing."))
+                .body("error.code", equalTo(1003))
+                .body(matchesJsonSchemaInClasspath("schemas/rest/current_weather_error_schema.json"));
     }
 }

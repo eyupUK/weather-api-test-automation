@@ -52,8 +52,30 @@ class CurrentWeatherTest {
         Response response = request.when().get("/current.json");
 
         assertMissingApiKeyResponse(response);
+    }
 
-        response.then().assertThat()
-                .body(matchesJsonSchemaInClasspath("schemas/rest/current_weather_unauthorized.json"));
+    @Test
+    @DisplayName("Current weather returns unauthorized response when API key is invalid")
+    void shouldReturnUnauthorizedResponseWhenApiKeyIsInvalid() {
+        RequestSpecification request = given().spec(baseSpecs())
+                .queryParam("key", "dummykey")
+                .queryParam("q", "52.4862,-1.8904");
+
+        Response response = request.when().get("/current.json");
+
+        assertInvalidApiKeyResponse(response);
+    }
+
+    @Test
+    @DisplayName("Current weather returns bad request response when query is missing")
+    void shouldReturnBadRequestWhenQueryIsMissing() {
+
+        Response response =
+                given()
+                        .spec(baseSpecsWithApiKey())
+                .when()
+                        .get("/current.json");
+
+        assertMissingQueryResponse(response);
     }
 }
