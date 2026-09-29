@@ -1,7 +1,7 @@
 package dev.eyup.searchai.qe.model.request;
 
 import java.math.BigDecimal;
-import java.util.Random;
+
 
 public class CreateProductRequest {
     private String title;
