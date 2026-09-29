@@ -1,6 +1,7 @@
 package dev.eyup.searchai.qe.model.request;
 
 import java.math.BigDecimal;
+import java.util.Random;
 
 public class CreateProductRequest {
     private String title;
@@ -41,12 +42,14 @@ public class CreateProductRequest {
     }
 
     public String toString() {
-        return "CreateProductRequest{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", category='" + category + '\'' +
-                ", image='" + image + '\'' +
-                ", price=" + price +
-                '}';
+        return         """
+        {
+          "title": "%s",
+          "description": "%s",
+          "category": "%s",
+          "image": "%s",
+          "price": %s
+        }
+        """.formatted(title, description, category, image, price);
     }
 }
