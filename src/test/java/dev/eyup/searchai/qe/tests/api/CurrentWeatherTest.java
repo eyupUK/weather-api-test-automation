@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 
 import static dev.eyup.searchai.qe.assertions.WeatherApiAssertion.*;
-import static dev.eyup.searchai.qe.config.RequestSpec.baseSpecs;
-import static dev.eyup.searchai.qe.config.RequestSpec.baseSpecsWithApiKey;
+import static dev.eyup.searchai.qe.config.WeatherApiRequestSpec.baseSpecs;
+import static dev.eyup.searchai.qe.config.WeatherApiRequestSpec.baseSpecsWithApiKey;
 import static io.restassured.RestAssured.given;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.Matchers.equalTo;

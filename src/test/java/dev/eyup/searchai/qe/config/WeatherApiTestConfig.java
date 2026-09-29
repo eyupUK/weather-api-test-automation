@@ -6,7 +6,7 @@ import dev.eyup.searchai.qe.support.ConfigurationReader;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public class TestConfig {
+public class WeatherApiTestConfig {
 
     public String getApiKey() {
         String apiKey = System.getenv("WEATHER_API_KEY") != null ? System.getenv("WEATHER_API_KEY") : ConfigurationReader.getProperty("WEATHER_API_KEY");

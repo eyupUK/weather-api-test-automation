@@ -9,10 +9,10 @@ import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.config.LogConfig.logConfig;
 
-public class RequestSpec {
+public class WeatherApiRequestSpec {
 
     public static RequestSpecification baseSpecs() {
-        TestConfig testConfig = new TestConfig();
+        WeatherApiTestConfig weatherApiTestConfig = new WeatherApiTestConfig();
         LogConfig logConfig =
                 logConfig()
                         .blacklistDefaultSensitiveHeaders()
@@ -24,7 +24,7 @@ public class RequestSpec {
                         );
 
         return new RequestSpecBuilder()
-                .setBaseUri(testConfig.getBaseUri())
+                .setBaseUri(weatherApiTestConfig.getBaseUri())
                 .setAccept(ContentType.JSON)
                 .setConfig(restAssuredConfig)
                 .setBasePath("/v1")
@@ -35,7 +35,7 @@ public class RequestSpec {
 
         return new RequestSpecBuilder()
                 .addRequestSpecification(baseSpecs())
-                .addQueryParam("key", new TestConfig().getApiKey())
+                .addQueryParam("key", new WeatherApiTestConfig().getApiKey())
                 .build();
     }
 }
